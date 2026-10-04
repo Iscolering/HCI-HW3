@@ -1,6 +1,6 @@
 import uvicorn
  
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
@@ -40,21 +40,36 @@ def get_questions():
 
 @app.post("/add")
 def add_question(req: QuestionRequest):
+    # Use one more than the largest existing id (rather than len(questions)) so that
+    # ids stay unique even after questions have been deleted.
+    new_id = max((q["id"] for q in questions), default=-1) + 1
     questions.append({ 
-        "id": len(questions),
+        "id": new_id,
         "q": req.question,
         "a": req.answer
     })
 
-# TODO: Add a new route that can be used to delete a question/answer from the dataset.
+def find_question(id: int):
+    # Return the question dictionary with the given id, or raise a 404 if it does not exist
+    for question in questions:
+        if question["id"] == id:
+            return question
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Question with ID {id} not found")
+
+# Route that can be used to delete a question/answer from the dataset.
 @app.delete("/delete/{id}")
 def delete_question(id: int):
-    pass
+    question = find_question(id)
+    questions.remove(question)
+    return {"detail": f"Question with ID {id} deleted"}
 
-# TODO: Add a new route that can be used to update a question/answer within the dataset.
+# Route that can be used to update a question/answer within the dataset.
 @app.put("/update/{id}")
 def update_question(id: int, req: QuestionRequest):
-    pass
+    question = find_question(id)
+    question["q"] = req.question
+    question["a"] = req.answer
+    return question
 
 if __name__=="__main__":
     uvicorn.run(app, port=8005)
