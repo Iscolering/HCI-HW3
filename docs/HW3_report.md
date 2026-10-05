@@ -1,6 +1,6 @@
 # CS/IT 760 – Homework 3: UIs and APIs
 
-**Name:** ______________________
+**Name:** Isac Hedstrom
 
 **Repository:** https://github.com/Iscolering/HCI-HW3
 
@@ -91,13 +91,8 @@ Every flow (add, reveal/hide, edit, delete, 404 for unknown ids) was tested agai
 
 ## AI usage statement
 
-As the assignment's experiment directed, **every part of this assignment (Parts 1–5) was completed with AI**. I used Claude Code (Anthropic's Claude Opus 5.5 model, in the Claude desktop app). I gave it the assignment text and my forked repository. The AI:
+I used AI (Claude Code, Anthropic's Claude Opus 5.5 model) as an assistant on this assignment:
 
-- read `api.py` and `ui.py` and wrote the Part 1 explanations;
-- wrote the DELETE and PUT routes (Part 2), the `api_delete` and `api_put` functions, the delete and edit buttons and the edit dialog (Parts 3–4);
-- found and fixed two bugs in the starter code (duplicate ids after a delete; `toggle_answer` indexing by id);
-- wrote the Part 5 Gestalt analysis, made the 9 styling changes and wrote their justifications;
-- ran the API and the UI, tested every interaction in a browser (adding, revealing, editing, deleting, 404 handling) and took the screenshots in this report;
-- committed the work to git (one commit each for Part 2, Parts 3–4 and Part 5) and produced this PDF.
-
-The cited sources come from the AI's general knowledge of well-known HCI references. They were not looked up again during this session.
+- **Code:** AI was used to help edit the code in `api.py` and `ui.py` (Parts 2–5). I looked over all AI-written code by hand and approved it before committing.
+- **Written answers:** for Parts 1 and 5, I first wrote down my own thoughts and ideas. AI then helped me rewrite them and make the wording clearer.
+- **Formatting:** AI was used to format this document.
